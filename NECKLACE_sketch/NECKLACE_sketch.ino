@@ -1,6 +1,7 @@
 /*
   FLICKER FLARE
   Girls Who Code
+  Maggie Storino
   Day 3: Flicker Flare Light Sensing Garment
   Project Example
   This example uses the LilyPad ProtoSnap Plus board to read the raw values
@@ -15,17 +16,6 @@ int sensorPin = A5;   // select the input pin for the sensor
 int ledPin1 = 9;      // select the pin for the LED
 int ledPin2 = 10;     // select the pin for the LED
 int ledPin3 = 11;     // select the pin for the LED
-
-/*
-  Uncomment to use these variables:
-  
-  //variables for input and output on LilyPad Protosnap Plus
-  int sensorPin = A2;   // select the input pin for the sensor
-  int ledPin1 = 6;      // select the pin for the LED
-  int ledPin2 = A7;     // select the pin for the LED
-  int ledPin3 = A8;     // select the pin for the LED
-  
-*/
 
 // variable to store the value coming from the sensor
 int sensorValue = 0;
@@ -53,13 +43,15 @@ void loop() {
   Serial.print(sensorValue);
   Serial.print("\t");
 
-  //map the sensor values based on your readings
+  //map the sensor values based on your readings (reset the high and low to reflect pin readings)
   int newSensorValue = map(sensorValue, 15, 220, 0, 255);
 
   //constrain the values so you don't get jumpy LED behavior
   newSensorValue = constrain(newSensorValue, 0, 255);
 
-  //write the new value to the LEDs
+  //write the new value to the LEDs, analog lets you input a range of information not just on/off (digital)
+  //This helps the lights reflect the sensor input which is a gradual change
+  
   analogWrite(ledPin1, newSensorValue);
   analogWrite(ledPin2, newSensorValue);
   analogWrite(ledPin3, newSensorValue);
